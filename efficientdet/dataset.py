@@ -63,14 +63,11 @@ class CustomDataset(Dataset):
                     except ValueError:
                         #print(f"warning, {label} not in the category list at annotation file {a_p_f}")
                         continue
-                    x = max(0,box[0])
-                    y = max(0,box[1])
-                    w = box[2] - x
-                    h = box[3] - y
-                    # skip boxes that width or height is lower than 1
-                    if box[2] < 1 or box[3] < 1: continue
 
-                    t.append([x,y,w,h,cls_idx])
+                    # skip boxes that width or height is lower than 1
+                    if box[2]-box[0] < 1 or box[3]-box[1] < 1: continue
+
+                    t.append([*box,cls_idx])
 
             except Exception as e:
                 print(f"corrupted annotation file: {a_p_f}\n",e)
