@@ -93,7 +93,9 @@ class CustomDataset(Dataset):
         return len(self.ids)
 
     def __getitem__(self, idx:int):
-        sample = { 'img': self._load_img(self.ids[idx]), 'annot': self.targets[idx]}
+        img = self._load_img(self.ids[idx])
+        annot = self.targets[idx]
+        sample = { 'img': img, 'annot': annot}
 
         if self.transform:
             sample = self.transform(sample)
@@ -141,6 +143,7 @@ class CocoDataset(Dataset):
 
         img = self.load_image(idx)
         annot = self.load_annotations(idx)
+
         sample = {'img': img, 'annot': annot}
 
         if self.transform:
