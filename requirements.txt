@@ -1,3 +1,6 @@
 torch
 torchvision
 opencv-python
+pycocotools
+tensorboardX
+webcolors
